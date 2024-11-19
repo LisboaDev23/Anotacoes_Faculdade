@@ -1,0 +1,37 @@
+3 - VIEWS
+
+VIEWS são visões de uma ou mais tabelas, são criadas para facilitar o acesso à tabelas
+
+3.1 Criando uma VIEW
+
+CREATE VIEW view_um
+AS SELECT numero_empregado, nome_empregado, cargo
+FROM tb_empregados
+WHERE numero_dpt = 10;
+
+-- ESTAMOS ASSOCIANDO O SELECT FEITO APÓS O "AS" À VIEW "view_um"
+
+3.2 Fazer o select na view ao invés da QUERY diretamente
+
+SELECT * FROM view_um;
+
+3.3 Manipulando o banco através da VIEW
+
+UPDATE view_um SET nome_empregado="LISBOA" WHERE numero_empregado="1683";
+
+SELECT * FROM view_um;  --testando vendo se foi atualizado o nome do usuário 
+
+
+-------------- CRIAÇÃO E EXCLUSÃO DAS VIEWS -----------------
+
+ENTENDENDO A HIERARQUIA DAS EXCLUSÕES
+
+Quando excluímos alguma tabela no banco de dados, temos que entender que as views que estiverem
+ligadas a essa tabela, irão perder a referência. E quando excluímos um objeto de forma geral,
+todos os seus dependentes também serão excluídos.
+
+
+3.4 EXCLUSÃO DA VIEW 
+
+drop view view_um;
+

@@ -1,0 +1,50 @@
+1 - CRIANDO E GERENCIANDO USUÁRIOS - ORACLE
+
+1.1 Conectar com um usuário que seja DBA do banco - administrador
+
+1.2 CRIANDO USUÁRIO 
+	create user gabriel  --user
+	identified isaevagape  --password
+	default tablespace system  --local padrão onde poderá gravar os dados
+	quota unlimited on system  --o usuário poderá gravar quanto quiser enquanto houver espaço
+	password expire;  --toda vez que o usuário fizer conexão, será pedida uma nova senha
+// sem definições
+
+create user gabriel
+identified isaevagape
+default tablespace system
+quota unlimited on system
+password expire;
+
+1.3 DEPOIS DE CRIAR O USUÁRIO, DEVEREMOS CONCEDER PRIVILÉGIOS AO USUÁRIO
+
+	grant create session, create table to gabriel;
+
+--create session - pode se conectar ao banco
+--create table - poderá criar tabelas no banco de dados
+
+1.4 COMANDO PARA SE CONECTAR COM O BANCO ORACLE
+
+-- conn gabriel/isaevagape 
+
+ERROR the password has expired
+Nova Senha: __
+
++++ SHOW USER +++ mostrará quais usuários estarão conectados no banco 
+
+1.4 Consultar usuários que possuem determinados privilégios
+
+Verificar informações dos objetos
+
+SELECT username, account_status,default_tablespace, CREATED from dba_users where username = 'gabriel';
+
+//comando que retornará os dados do usuário que possui o privilégio de dba como dito no from -> dba_users
+
+1.5 ELIMINAR USUÁRIOS
+
+DROP USER gabriel; 
+
+ --esse comando só funcionará se o usuário não tiver criado nenhum objeto, caso tenha teremos que usar o comando CASCADE para eliminar todos os objetos criados pelo usuário e eliminá-lo do sistema.
+
+DROP USER gabriel CASCADE;
+

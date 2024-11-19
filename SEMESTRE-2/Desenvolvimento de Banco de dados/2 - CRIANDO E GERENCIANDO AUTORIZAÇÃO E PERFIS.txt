@@ -1,0 +1,43 @@
+2 - CRIAÇÃO E GERENCIAMENTO DE AUTORIZAÇÃO DE PERFIS
+
+PROFILE - CONCEITO IMPORTANTE PARA O BANCO DE DADOS ORACLE
+
+create user gabriel
+identified isaevagape
+default tablespace system
+quota 15m on system;
+
+--ESSE USUÁRIO PODERÁ GRAVAR APENAS 15 MEGAS PARA GRAVAR NO BANCO
+
+2.1 - Permitindo criação de sessões ao banco de dados
+
+grant create session to gabriel; --permitindo ao Gabriel a conexão com o banco;
+
+conn gabriel/isaevage;   --testando a conexão
+
+2.2 Bloqueando o acesso à conta do usuário Gabriel 
+
+alter user gabriel account lock;
+
+** Verificar se está desbloqueada - account_status deverá estar LOCKED
+
++++ bloqueia a conta e caso esteja conectado, ele desconecta do banco
+
+2.3 Desbloquear o acesso ao usuário Gabriel
+
+alter user gabriel account unlock;
+
+** Verificar se está desbloqueada - account_status do usuário deverá estar OPEN
+
+2.4 CRIANDO PERFIL
+
+create profile conexão limit FAILED_LOGIN_ATTEMPTS 2;
+
+--criando perfil e ele somente poderá errar o login 2 vezes, se errar mais, perfil será bloqueado
+
+
+2.5 DANDO PERFIL AO USUÁRIO
+
+alter user gabriel profile conexão;
+
+
